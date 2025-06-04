@@ -180,5 +180,5 @@ cython_debug/
 *.DS_Store
 
 test/
-tests/
+#tests/
 
