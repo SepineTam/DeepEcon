@@ -12,11 +12,14 @@ from abc import ABC, abstractmethod
 
 class ErrorBase(ABC):
     error_name: str = "error_name"  # must be overwritten
-    error_doc_base: str = "https://github.com/SepineTam/DeepEcon/blob/master/source/docs/deepecon/errors"
+    error_doc_base: str = "https://github.com/SepineTam/DeepEcon/blob/master/source/docs/deepecon/errors/"
     end_with: str = ".md"
 
     @abstractmethod
     def __init__(self, *args, **kwargs): ...
+
+    def __str__(self):
+        return self.error_msg()
 
     @abstractmethod
     def error_msg(self, *args, **kwargs) -> str: ...

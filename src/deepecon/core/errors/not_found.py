@@ -7,6 +7,8 @@
 # @Email  : sepinetam@gmail.com
 # @File   : not_found.py
 
+import logging
+
 from .base import ErrorBase
 
 
@@ -15,7 +17,7 @@ class NotFoundError(ErrorBase):
 
     def __init__(self, *args, **kwargs):
         msg = self.error_msg()
-        print(msg)
+        logging.warning(msg)
 
 
 class ConditionNotFoundError(NotFoundError):
