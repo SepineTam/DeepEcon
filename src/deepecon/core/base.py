@@ -47,6 +47,7 @@ class TransformBase(ABC):
                  **kwargs) -> pd.DataFrame:
         """
         Apply transformation to specified columns of the dataframe and return the transformed dataframe.
+        The previous df will not be change, you must capture the return value if you want to change it.
 
         Args:
             (Options)
