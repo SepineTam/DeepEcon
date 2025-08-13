@@ -15,6 +15,8 @@ from typing import List, Optional
 
 import pandas as pd
 
+from .condition import Condition
+
 
 @dataclass
 class DataFrameBase(ABC):
@@ -37,26 +39,23 @@ class TransformBase(ABC):
 
     @abstractmethod
     def __call__(self,
-                 X_cols: List[str],
-                 y_col: Optional[List[str]] = None,
-                 *args,
+                 X_cols: Optional[List[str]] = None,
+                 y_cols: Optional[List[str]] = None,
+                 _if_exp: Optional[Condition] = None,
                  replace: bool = False,
-                 _if: Optional[str] = None,
+                 *args,
                  **kwargs) -> pd.DataFrame:
         """
         Apply transformation to specified columns of the dataframe and return the transformed dataframe.
 
         Args:
+            (Options)
             X_cols (List[str]):
                 the cols which need to be processed.
             y_cols (Optional[List[str]]):
                 the newer cols name
-            ...
-
-            (Options)
             replace (bool):
                 whether replace the previous col with the newer one.
-
             ...
 
         Returns:
