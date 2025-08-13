@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2025 - Present Sepine Tam, Inc. All Rights Reserved
+#
+# @Author : Sepine Tam (谭淞)
+# @Email  : sepinetam@gmail.com
+# @File   : base.py
+
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from typing import List, Optional
+
+import pandas as pd
+
+
+@dataclass
+class DataFrameBase(ABC):
+    def __init__(self): pass
+
+
+class ResultBase(ABC):
+    def __init__(self): pass
+
+
+class EstimatorBase(ABC):
+    def __init__(self): pass
+
+
+class TransformBase(ABC):
+    name: str = "transform"  # must be unique
+
+    def __init__(self, df: pd.DataFrame | None = None):
+        self.df = df
+
+    @abstractmethod
+    def __call__(self,
+                 X_cols: List[str],
+                 y_col: Optional[List[str]] = None,
+                 *args,
+                 replace: bool = False,
+                 _if: Optional[str] = None,
+                 **kwargs) -> pd.DataFrame:
+        """
+        Apply transformation to specified columns of the dataframe and return the transformed dataframe.
+
+        Args:
+            X_cols (List[str]):
+                the cols which need to be processed.
+            y_cols (Optional[List[str]]):
+                the newer cols name
+            ...
+
+            (Options)
+            replace (bool):
+                whether replace the previous col with the newer one.
+
+            ...
+
+        Returns:
+            pd.DataFrame: the processed pd.DataFrame
+        """
+        return self.df
