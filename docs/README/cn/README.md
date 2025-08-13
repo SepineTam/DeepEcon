@@ -1,34 +1,35 @@
 # DeepEcon
-DeepEcon：Your one-stop Python package for econometric algorithms
+DeepEcon：你的一站式计量经济算法包
 
-[![en](https://img.shields.io/badge/lang-English-red.svg)](README.md)
-[![cn](https://img.shields.io/badge/语言-中文-yellow.svg)](docs/README/cn/README.md)
+[![en](https://img.shields.io/badge/lang-English-red.svg)](../../../README.md)
+[![cn](https://img.shields.io/badge/语言-中文-yellow.svg)](README.md)
 [![PyPI version](https://img.shields.io/pypi/v/deepecon.svg)](https://pypi.org/project/deepecon/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Installation
-### Install from Pypi
+
+## 安装
+### 通过 Pypi 进行安装
 ```bash
 pip install deepecon
 ```
 
-### Manage with uv
+### 通过 uv 进行管理
 ```bash
 uv add deepecon
 ```
 
-or
+或者
 
 ```bash
 uv pip install deepecon
 ```
 
-### Install from GitHub
+### 从 GitHub 进行安装
 ```bash
 pip install git+https://github.com/sepinetam/deepecon.git
 ```
 
-Alternatively, you can install it from the source:
+或者你也可以通过源码进行安装
 
 ```bash
 # please source your environment first
