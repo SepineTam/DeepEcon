@@ -179,6 +179,5 @@ cython_debug/
 
 *.DS_Store
 
-test/
-#tests/
-
+# local files
+*.local.*

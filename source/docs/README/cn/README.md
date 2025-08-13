@@ -1,7 +1,7 @@
 # DeepEcon
 DeepEcon：你的一站式计量经济算法包
 
-[![en](https://img.shields.io/badge/lang-English-red.svg)](../../../README.md)
+[![en](https://img.shields.io/badge/lang-English-red.svg)](../../../../README.md)
 [![cn](https://img.shields.io/badge/语言-中文-yellow.svg)](README.md)
 [![PyPI version](https://img.shields.io/pypi/v/deepecon.svg)](https://pypi.org/project/deepecon/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
