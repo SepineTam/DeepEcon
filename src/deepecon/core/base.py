@@ -50,10 +50,12 @@ class TransformBase(ABC):
 
         Args:
             (Options)
-            X_cols (List[str]):
+            X_cols (Optional[List[str]]):
                 the cols which need to be processed.
             y_cols (Optional[List[str]]):
                 the newer cols name
+            _if_exp (Optional[Condition)]:
+                the exception condition
             replace (bool):
                 whether replace the previous col with the newer one.
             ...
