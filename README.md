@@ -44,6 +44,9 @@ cd deepecon
 pip install -e .
 ```
 
+## License
+[MIT License](LICENSE)
+
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=sepinetam/deepecon&type=Date)](https://www.star-history.com/#sepinetam/deepecon&Date)
 

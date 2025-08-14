@@ -6,6 +6,8 @@ readme = "README.md"
 authors = [
     { name = "SongTan", email = "sepinetam@gmail.com" }
 ]
+requires-python = ">=3.11"
+license = {text = "MIT"}
 dependencies = [
     "numpy>=2.0.2",
     "openpyxl>=3.1.5",
