@@ -12,7 +12,6 @@ from .length import LengthNotMatchError
 from .not_found import (ConditionNotFoundError, FileNotFoundError,
                         OperatorNotFoundError, VarNotFoundError)
 
-
 __all__ = [
     # ExistError
     "FileExistError",
