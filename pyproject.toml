@@ -13,6 +13,11 @@ dependencies = [
     "pandas>=2.2.3",
 ]
 
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+
 [project.scripts]
 deepecon = "deepecon:main"
 

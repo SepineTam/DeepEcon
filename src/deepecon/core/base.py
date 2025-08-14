@@ -34,7 +34,7 @@ class EstimatorBase(ABC):
 class TransformBase(ABC):
     name: str = "transform"  # must be unique
 
-    def __init__(self, df: pd.DataFrame | None = None):
+    def __init__(self, df: pd.DataFrame):
         self.df = df
 
     @abstractmethod
