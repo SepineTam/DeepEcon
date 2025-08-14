@@ -9,9 +9,14 @@
 
 from .not_found import (ConditionNotFoundError, FileNotFoundError,
                         VarNotFoundError)
+from .length import LengthNotMatchError
 
 __all__ = [
+    # NotFoundError
     'ConditionNotFoundError',
     'FileNotFoundError',
     'VarNotFoundError',
+
+    # LengthError
+    'LengthNotMatchError',
 ]
