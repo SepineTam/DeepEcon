@@ -7,30 +7,20 @@
 # @Email  : sepinetam@gmail.com
 # @File   : not_found.py
 
-import logging
-
 from .base import ErrorBase
 
 
 class NotFoundError(ErrorBase):
-    def relative_doc_path(self) -> str: return "not_found/README"
-
-    def __init__(self, *args, **kwargs):
-        msg = self.error_msg()
-        logging.warning(msg)
-
-
-class ConditionNotFoundError(NotFoundError):
-    error_name = "ConditionNotFound"
-
-    def error_msg(self) -> str:
-        return (f"ConditionNotFound: Not Found Condition\n"
-                f"Open Document: {self.open_error_docs()}")
+    def relative_doc_path(self) -> str: return "not_found"
 
 
 class FileNotFoundError(NotFoundError):
-    pass
+    def error_code(self) -> int: return 1001
 
 
 class VarNotFoundError(NotFoundError):
-    pass
+    def error_code(self) -> int: return 1002
+
+
+class ConditionNotFoundError(NotFoundError):
+    def error_code(self) -> int: return 1003

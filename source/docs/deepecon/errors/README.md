@@ -1,3 +1,3 @@
 # Errors
 **Catalog**
-- [NotFoundError](not_found/READMD.md)
+- [NotFoundError](not_found/README.md)
