@@ -6,6 +6,7 @@
 - [ConditionNotFound, 1003](#conditionnotfound)
 - [FileNotFound, 1001](#filenotfound)
 - [VarNotFound, 1002](#varnotfound)
+- [OperatorNotFound, 1004](#operatornotfound)
 
 ## ConditionNotFound
 ### 原因
@@ -18,6 +19,8 @@
 一般情况下，该错误不会发生，只有特定的必须要传入条件的才会发出这个错误。
 
 ## FileNotFound
+
+## OperatorNotFound
 
 ## VarNotFound
 

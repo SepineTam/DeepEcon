@@ -16,4 +16,3 @@ class LengthError(ErrorBase):
 
 class LengthNotMatchError(LengthError):
     def error_code(self) -> int: return 2001
-

@@ -24,3 +24,7 @@ class VarNotFoundError(NotFoundError):
 
 class ConditionNotFoundError(NotFoundError):
     def error_code(self) -> int: return 1003
+
+
+class OperatorNotFoundError(NotFoundError):
+    def error_code(self) -> int: return 1004

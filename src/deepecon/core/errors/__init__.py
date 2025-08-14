@@ -7,16 +7,23 @@
 # @Email  : sepinetam@gmail.com
 # @File   : __init__.py
 
-from .not_found import (ConditionNotFoundError, FileNotFoundError,
-                        VarNotFoundError)
+from .exist import FileExistError, VarExistError
 from .length import LengthNotMatchError
+from .not_found import (ConditionNotFoundError, FileNotFoundError,
+                        OperatorNotFoundError, VarNotFoundError)
+
 
 __all__ = [
-    # NotFoundError
-    'ConditionNotFoundError',
-    'FileNotFoundError',
-    'VarNotFoundError',
+    # ExistError
+    "FileExistError",
+    "VarExistError",
 
     # LengthError
     'LengthNotMatchError',
+
+    # NotFoundError
+    'ConditionNotFoundError',
+    'FileNotFoundError',
+    'OperatorNotFoundError',
+    'VarNotFoundError',
 ]

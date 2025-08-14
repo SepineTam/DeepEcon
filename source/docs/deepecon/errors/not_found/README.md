@@ -6,6 +6,7 @@
 - [ConditionNotFound, 1003](#conditionnotfound)
 - [FileNotFound, 1001](#filenotfound)
 - [VarNotFound, 1002](#varnotfound)
+- [OperatorNotFound, 1004](#operatornotfound)
 
 ## ConditionNotFound
 ### Reason
@@ -18,6 +19,8 @@ When invoking the function or performing the operation, make sure to supply the 
 In general, this error should not occur; it is only raised for operations that explicitly require a condition to be passed.
 
 ## FileNotFound
+
+## OperatorNotFound
 
 ## VarNotFound
 
