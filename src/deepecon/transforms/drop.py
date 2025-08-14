@@ -13,6 +13,7 @@ import pandas as pd
 
 from ..core.base import TransformBase
 from ..core.condition import Condition
+from ..core.errors import ConditionNotFoundError
 
 
 class DropVar(TransformBase):
@@ -42,7 +43,7 @@ class DropCondition(TransformBase):
                  _if_exp: Optional[Condition] = None,
                  *args, **kwargs) -> pd.DataFrame:
         if _if_exp is None:
-            return self.df
+            raise ConditionNotFoundError("Missing the condition of drop")
 
         mask = _if_exp(self.df)
         self.df = self.df[~mask]
@@ -57,7 +58,7 @@ class KeepCondition(TransformBase):
                  _if_exp: Optional[Condition] = None,
                  *args, **kwargs) -> pd.DataFrame:
         if _if_exp is None:
-            return self.df
+            raise ConditionNotFoundError("Missing the condition of keep")
 
         mask = _if_exp(self.df)
         self.df = self.df[mask]
