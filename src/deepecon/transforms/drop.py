@@ -13,7 +13,7 @@ import pandas as pd
 
 from ..core.base import TransformBase
 from ..core.condition import Condition
-from ..core.errors import ConditionNotFoundError
+from ..core.errors import ConditionNotFoundError, VarNotFoundError
 
 
 class DropVar(TransformBase):
@@ -22,6 +22,11 @@ class DropVar(TransformBase):
     def __call__(self,
                  X_cols: Optional[List[str]] = None,
                  *args, **kwargs) -> pd.DataFrame:
+        if not X_cols:
+            raise ValueError("Missing the vars to drop")
+        if not set(X_cols).issubset(set(self.df.columns)):
+            raise VarNotFoundError(X_cols)
+
         self.df = self.df.drop(columns=X_cols)
         return self.df
 
@@ -32,6 +37,10 @@ class KeepVar(TransformBase):
     def __call__(self,
                  X_cols: Optional[List[str]] = None,
                  *args, **kwargs) -> pd.DataFrame:
+        if not X_cols:
+            raise ValueError("Missing the vars to keep")
+        if not set(X_cols).issubset(set(self.df.columns)):
+            raise VarNotFoundError(X_cols)
         self.df = self.df[X_cols]
         return self.df
 
