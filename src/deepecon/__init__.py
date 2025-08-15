@@ -7,6 +7,11 @@
 # @Email  : sepinetam@gmail.com
 # @File   : __init__.py
 
+from importlib.metadata import version
+
+__version__ = version("deepecon")
+
+
 def main():
     print("Hello DeepEcon")
 
