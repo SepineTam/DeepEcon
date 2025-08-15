@@ -8,7 +8,7 @@
 # @File   : base.py
 
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import pandas as pd
 
@@ -18,13 +18,16 @@ from ...core.errors import LengthNotMatchError, OperatorNotFoundError
 
 
 class BasicMathBase(TransformBase, ABC):
-    def __call__(self,
-                 X_cols: Optional[List[str]] = None,
-                 y_cols: Optional[List[str]] = None,
-                 _if_exp: Optional[Condition] = None,
-                 replace: bool = False,
-                 *args,
-                 **kwargs) -> pd.DataFrame:
+    def options(self) -> Dict[str, str]:
+        return self.std_ops(["y_cols"],
+                            add_ops={"op": "the operator of mathematical expressions"})
+
+    def transform(self,
+                  y_cols: Optional[List[str]] = None,
+                  X_cols: Optional[List[str]] = None,
+                  _if_exp: Optional[Condition] = None,
+                  replace: bool = False,
+                  *args, **kwargs) -> pd.DataFrame:
         # check for the required arguments
         if not y_cols:
             raise TypeError("Missing 1 required positional argument: 'y_clos'")
