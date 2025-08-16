@@ -35,10 +35,11 @@ class ResultBase(ABC):
     ts: datetime = field(default_factory=datetime.now)
     mthd: Literal[list_renderers()] = field(default="stata")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if "mthd" in kwargs and isinstance(kwargs["mthd"], str):
-            self.mthd = kwargs["mthd"]
+    def set_mthd(self, mthd: str):
+        if mthd in list_renderers():
+            self.mthd = mthd
+        else:
+            pass
 
     def __post_init__(self):
         self.meta["Date"] = self.ts.date()
