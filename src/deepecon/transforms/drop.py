@@ -18,7 +18,7 @@ from ..core.errors import ConditionNotFoundError, VarNotFoundError
 
 class _BaseVar(TransformBase):
     def options(self) -> Dict[str, str]:
-        return self.std_ops(["X_col"])
+        return self.std_ops(["X_cols"])
 
 
 class _BaseCondition(TransformBase):
@@ -31,7 +31,7 @@ class DropVar(_BaseVar):
 
     def transform(
         self,
-        y_cols: Optional[List[str]] = None,
+        y_col: Optional[str] = None,
         X_cols: Optional[List[str]] = None,
         _if_exp: Optional[Condition] = None,
         replace: bool = False,
@@ -52,7 +52,7 @@ class KeepVar(_BaseVar):
 
     def transform(
         self,
-        y_cols: Optional[List[str]] = None,
+        y_col: Optional[str] = None,
         X_cols: Optional[List[str]] = None,
         _if_exp: Optional[Condition] = None,
         replace: bool = False,
@@ -72,7 +72,7 @@ class DropCondition(_BaseCondition):
 
     def transform(
         self,
-        y_cols: Optional[List[str]] = None,
+        y_col: Optional[str] = None,
         X_cols: Optional[List[str]] = None,
         _if_exp: Optional[Condition] = None,
         replace: bool = False,
@@ -93,7 +93,7 @@ class KeepCondition(_BaseCondition):
 
     def transform(
         self,
-        y_cols: Optional[List[str]] = None,
+        y_col: Optional[str] = None,
         X_cols: Optional[List[str]] = None,
         _if_exp: Optional[Condition] = None,
         replace: bool = False,

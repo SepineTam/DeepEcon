@@ -150,7 +150,7 @@ class EstimatorBase(Base):
     @abstractmethod
     def estimator(
         self,
-        y_cols: str,
+        y_col: str,
         X_cols: List[str],
         _if_exp: Optional[Condition] = None,
         weight: Optional[pd.Series | str] = None,
@@ -159,11 +159,11 @@ class EstimatorBase(Base):
     ) -> pd.DataFrame: ...
 
     def pre_process(
-        self, y_cols: str, X_cols: List[str], _if_exp: Optional[Condition] = None
+        self, y_col: str, X_cols: List[str], _if_exp: Optional[Condition] = None
     ) -> None:
-        target_columns: List[str] = [y_cols] + X_cols
+        target_columns: List[str] = [y_col] + X_cols
         if not all(self.check_vars_exist(target_columns)):
-            raise VarNotFoundError(y_cols, X_cols)
+            raise VarNotFoundError(y_col, X_cols)
         self.df = self.df.dropna(subset=target_columns)
         self._condition_on(_if_exp)
 
@@ -200,7 +200,7 @@ class TransformBase(Base):
     @abstractmethod
     def transform(
         self,
-        y_cols: Optional[List[str]] = None,
+        y_col: Optional[str] = None,
         X_cols: Optional[List[str]] = None,
         _if_exp: Optional[Condition] = None,
         replace: bool = False,
@@ -213,7 +213,7 @@ class TransformBase(Base):
 
         Args:
             (Options) <- if you want to know which options is supported visit self.options
-            y_cols (Optional[List[str]]):
+            y_col (Optional[str]):
                 the newer cols name
             X_cols (Optional[List[str]]):
                 the cols which need to be processed.
