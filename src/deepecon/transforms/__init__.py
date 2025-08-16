@@ -12,11 +12,10 @@ from .drop import DropCondition, DropVar, KeepCondition, KeepVar
 
 __all__ = [
     # Basic
-    'BasicMath',
-
+    "BasicMath",
     # Drop
-    'DropVar',
-    'DropCondition',
-    'KeepVar',
-    'KeepCondition'
+    "DropVar",
+    "DropCondition",
+    "KeepVar",
+    "KeepCondition",
 ]

@@ -29,12 +29,15 @@ class _BaseCondition(TransformBase):
 class DropVar(_BaseVar):
     name: str = "drop_var"
 
-    def transform(self,
-                  y_cols: Optional[List[str]] = None,
-                  X_cols: Optional[List[str]] = None,
-                  _if_exp: Optional[Condition] = None,
-                  replace: bool = False,
-                  *args, **kwargs) -> pd.DataFrame:
+    def transform(
+        self,
+        y_cols: Optional[List[str]] = None,
+        X_cols: Optional[List[str]] = None,
+        _if_exp: Optional[Condition] = None,
+        replace: bool = False,
+        *args,
+        **kwargs,
+    ) -> pd.DataFrame:
         if not X_cols:
             raise ValueError("Missing the vars to drop")
         if not set(X_cols).issubset(set(self.df.columns)):
@@ -47,12 +50,15 @@ class DropVar(_BaseVar):
 class KeepVar(_BaseVar):
     name: str = "keep_var"
 
-    def transform(self,
-                  y_cols: Optional[List[str]] = None,
-                  X_cols: Optional[List[str]] = None,
-                  _if_exp: Optional[Condition] = None,
-                  replace: bool = False,
-                  *args, **kwargs) -> pd.DataFrame:
+    def transform(
+        self,
+        y_cols: Optional[List[str]] = None,
+        X_cols: Optional[List[str]] = None,
+        _if_exp: Optional[Condition] = None,
+        replace: bool = False,
+        *args,
+        **kwargs,
+    ) -> pd.DataFrame:
         if not X_cols:
             raise ValueError("Missing the vars to keep")
         if not set(X_cols).issubset(set(self.df.columns)):
@@ -64,12 +70,15 @@ class KeepVar(_BaseVar):
 class DropCondition(_BaseCondition):
     name: str = "drop_condition"
 
-    def transform(self,
-                  y_cols: Optional[List[str]] = None,
-                  X_cols: Optional[List[str]] = None,
-                  _if_exp: Optional[Condition] = None,
-                  replace: bool = False,
-                  *args, **kwargs) -> pd.DataFrame:
+    def transform(
+        self,
+        y_cols: Optional[List[str]] = None,
+        X_cols: Optional[List[str]] = None,
+        _if_exp: Optional[Condition] = None,
+        replace: bool = False,
+        *args,
+        **kwargs,
+    ) -> pd.DataFrame:
         if _if_exp is None:
             raise ConditionNotFoundError("Missing the condition of drop")
 
@@ -82,12 +91,15 @@ class DropCondition(_BaseCondition):
 class KeepCondition(_BaseCondition):
     name: str = "keep_condition"
 
-    def transform(self,
-                  y_cols: Optional[List[str]] = None,
-                  X_cols: Optional[List[str]] = None,
-                  _if_exp: Optional[Condition] = None,
-                  replace: bool = False,
-                  *args, **kwargs) -> pd.DataFrame:
+    def transform(
+        self,
+        y_cols: Optional[List[str]] = None,
+        X_cols: Optional[List[str]] = None,
+        _if_exp: Optional[Condition] = None,
+        replace: bool = False,
+        *args,
+        **kwargs,
+    ) -> pd.DataFrame:
         if _if_exp is None:
             raise ConditionNotFoundError("Missing the condition of keep")
 

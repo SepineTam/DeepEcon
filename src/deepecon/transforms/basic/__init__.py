@@ -32,7 +32,7 @@ class BasicMath(BasicMathBase):
             Calculation result as Series
         """
         # Replace operators to Python-supported format
-        expr = expr.replace('^', '**')
+        expr = expr.replace("^", "**")
 
         # Find all variable names (column names)
         variables = self._extract_variables(expr)
@@ -47,22 +47,21 @@ class BasicMath(BasicMathBase):
                 try:
                     var_dict[var] = float(var)
                 except ValueError:
-                    raise VarNotFoundError(
-                        f"Variable '{var}' not found in DataFrame")
+                    raise VarNotFoundError(f"Variable '{var}' not found in DataFrame")
 
         # Define safe mathematical functions
         safe_dict = {
-            'log': np.log,
-            'exp': np.exp,
-            'sin': np.sin,
-            'cos': np.cos,
-            'tan': np.tan,
-            'sqrt': np.sqrt,
-            'abs': np.abs,
-            'max': np.maximum,
-            'min': np.minimum,
-            'pi': math.pi,
-            'e': math.e
+            "log": np.log,
+            "exp": np.exp,
+            "sin": np.sin,
+            "cos": np.cos,
+            "tan": np.tan,
+            "sqrt": np.sqrt,
+            "abs": np.abs,
+            "max": np.maximum,
+            "min": np.minimum,
+            "pi": math.pi,
+            "e": math.e,
         }
 
         # Merge variables and functions
@@ -96,9 +95,10 @@ class BasicMath(BasicMathBase):
         """
         # Remove non-variable characters
         expr_clean = re.sub(
-            r'[\s\+\-\*\/\^\(\)\,\=\<\>\!\&\|\%\~\`\@\#\$\&\*\(\)\[\]\{\}\;\:\'\"\?\<\>\,\.\|\\\/]+',
-            ' ',
-            expr)
+            r"[\s\+\-\*\/\^\(\)\,\=\<\>\!\&\|\%\~\`\@\#\$\&\*\(\)\[\]\{\}\;\:\'\"\?\<\>\,\.\|\\\/]+",
+            " ",
+            expr,
+        )
 
         # Split and filter variable names
         tokens = expr_clean.split()
@@ -106,24 +106,18 @@ class BasicMath(BasicMathBase):
 
         for token in tokens:
             # Check if it's a numeric constant
-            if not token.replace(
-                    '.',
-                    '',
-                    1).isdigit() and token not in [
-                'pi',
-                'e'
-            ]:
+            if not token.replace(".", "", 1).isdigit() and token not in ["pi", "e"]:
                 # Check if it's a mathematical function
                 if token not in [
-                    'log',
-                    'exp',
-                    'sin',
-                    'cos',
-                    'tan',
-                    'sqrt',
-                    'abs',
-                    'max',
-                    'min'
+                    "log",
+                    "exp",
+                    "sin",
+                    "cos",
+                    "tan",
+                    "sqrt",
+                    "abs",
+                    "max",
+                    "min",
                 ]:
                     variables.append(token)
 
