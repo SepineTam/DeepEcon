@@ -11,8 +11,10 @@ from .base import ErrorBase
 
 
 class LengthError(ErrorBase):
-    def relative_doc_path(self) -> str: return "length"
+    def relative_doc_path(self) -> str:
+        return "length"
 
 
 class LengthNotMatchError(LengthError):
-    def error_code(self) -> int: return 2001
+    def error_code(self) -> int:
+        return 2001

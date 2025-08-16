@@ -12,11 +12,9 @@ import os
 
 
 class LogManager:
-    def __init__(self,
-                 log_to_console: bool = True,
-                 path: str = None,
-                 *,
-                 encoding: str = "utf-8"):
+    def __init__(
+        self, log_to_console: bool = True, path: str = None, *, encoding: str = "utf-8"
+    ):
         self.ts = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
         if path:
@@ -72,9 +70,7 @@ class LogManager:
     def rm(self):
         os.remove(self._path)
 
-    def exit_with_save(self,
-                       is_save: bool = False,
-                       path: str = None):
+    def exit_with_save(self, is_save: bool = False, path: str = None):
         try:
             if is_save:
                 if path:

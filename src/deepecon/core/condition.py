@@ -59,9 +59,12 @@ class Not(CondBase):
 
 Op = Literal["==", "!=", ">", ">=", "<", "<="]
 _OP_MAP = {
-    "==": _op.eq, "!=": _op.ne,
-    ">": _op.gt, ">=": _op.ge,
-    "<": _op.lt, "<=": _op.le,
+    "==": _op.eq,
+    "!=": _op.ne,
+    ">": _op.gt,
+    ">=": _op.ge,
+    "<": _op.lt,
+    "<=": _op.le,
 }
 
 
@@ -150,10 +153,8 @@ class QueryCond(CondBase):
 
     def to_mask(self, df: pd.DataFrame) -> pd.Series:
         idx = df.query(
-            self.expr,
-            engine=self.engine,
-            local_dict=dict(
-                self.local_vars)).index
+            self.expr, engine=self.engine, local_dict=dict(self.local_vars)
+        ).index
         return df.index.isin(idx)
 
 
@@ -161,8 +162,15 @@ def col(name: str) -> Col:
     return Col(name)
 
 
-def as_cond(c: Union[CondBase, str, pd.Series, Callable[[
-        pd.DataFrame], pd.Series], tuple[str, Op, Any]]) -> CondBase:
+def as_cond(
+    c: Union[
+        CondBase,
+        str,
+        pd.Series,
+        Callable[[pd.DataFrame], pd.Series],
+        tuple[str, Op, Any],
+    ],
+) -> CondBase:
     if isinstance(c, CondBase):
         return c
     if isinstance(c, str):
@@ -208,10 +216,8 @@ class Condition:
             object.__setattr__(
                 self,
                 "_inner",
-                QueryCond(
-                    expr,
-                    engine=engine,
-                    local_vars=local_vars or {}))
+                QueryCond(expr, engine=engine, local_vars=local_vars or {}),
+            )
         elif isinstance(expr, pd.Series):
             object.__setattr__(self, "_inner", MaskCond(expr))
         elif callable(expr):

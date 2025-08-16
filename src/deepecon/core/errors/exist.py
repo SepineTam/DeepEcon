@@ -11,12 +11,15 @@ from .base import ErrorBase
 
 
 class ExistError(ErrorBase):
-    def relative_doc_path(self) -> str: return "exist"
+    def relative_doc_path(self) -> str:
+        return "exist"
 
 
 class FileExistError(ExistError):
-    def error_code(self) -> int: return 3001
+    def error_code(self) -> int:
+        return 3001
 
 
 class VarExistError(ExistError):
-    def error_code(self) -> int: return 3002
+    def error_code(self) -> int:
+        return 3002
