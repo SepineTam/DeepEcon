@@ -82,7 +82,6 @@ class Base(ABC):
 
     @abstractmethod
     def options(self) -> Dict[str, str]: ...
-
     """The args supported for this class conducted with dict"""
 
     def std_ops(

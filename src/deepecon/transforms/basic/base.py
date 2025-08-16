@@ -14,7 +14,7 @@ import pandas as pd
 
 from ...core.base import TransformBase
 from ...core.condition import Condition
-from ...core.errors import LengthNotMatchError, OperatorNotFoundError
+from ...core.errors import OperatorNotFoundError
 
 
 class BasicMathBase(TransformBase, ABC):
