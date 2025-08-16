@@ -21,7 +21,7 @@ class TestBasicMath:
         """Test power operation: gen age2 = age ^ 2"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["age2"], op="age ^ 2")
+        result = basic_math(y_col="age2", op="age ^ 2")
         
         expected = df['age'] ** 2
         pd.testing.assert_series_equal(result['age2'], expected, check_names=False)
@@ -30,7 +30,7 @@ class TestBasicMath:
         """Test addition operation: gen y1 = x1 + 1"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="x1 + 1")
+        result = basic_math(y_col="y1", op="x1 + 1")
         
         expected = df['x1'] + 1
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -40,7 +40,7 @@ class TestBasicMath:
         df = simu_data()
         original_age = df['age'].copy()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["age"], op="age + 1", replace=True)
+        result = basic_math(y_col="age", op="age + 1", replace=True)
         
         expected = original_age + 1
         pd.testing.assert_series_equal(result['age'], expected)
@@ -49,7 +49,7 @@ class TestBasicMath:
         """Test complex operation: gen y1 = x1 * x2 / 2 + log(age)"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="x1 * x2 / 2 + log(age)")
+        result = basic_math(y_col="y1", op="x1 * x2 / 2 + log(age)")
         
         expected = (df['x1'] * df['x2'] / 2) + np.log(df['age'])
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -58,7 +58,7 @@ class TestBasicMath:
         """Test division by zero: gen y1 = x1 / x3"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="x1 / x3")
+        result = basic_math(y_col="y1", op="x1 / x3")
         
         expected = df['x1'] / df['x3']
         # Allow inf values as they are mathematically correct for division by zero
@@ -68,7 +68,7 @@ class TestBasicMath:
         """Test log with negative values: gen y1 = log(x3)"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="log(x3)")
+        result = basic_math(y_col="y1", op="log(x3)")
         
         expected = np.log(df['x3'])
         # Allow actual numpy behavior for log of negative values and zero
@@ -78,7 +78,7 @@ class TestBasicMath:
         """Test multi-variable operation: gen y1 = x1 * x2 + x3"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="x1 * x2 + x3")
+        result = basic_math(y_col="y1", op="x1 * x2 + x3")
         
         expected = df['x1'] * df['x2'] + df['x3']
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -87,7 +87,7 @@ class TestBasicMath:
         """Test operation with constant: gen y1 = 5 + 3"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="5 + 3")
+        result = basic_math(y_col="y1", op="5 + 3")
         
         expected = pd.Series([8] * len(df))
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -98,7 +98,7 @@ class TestBasicMath:
         basic_math = BasicMath(df)
         
         with pytest.raises(Exception):  # Accept any exception type
-            basic_math(y_cols=["y1"], op="nonexistent_column + 1")
+            basic_math(y_col="y1", op="nonexistent_column + 1")
 
     def test_column_already_exists_error(self):
         """Test error handling for existing column without replace"""
@@ -106,13 +106,13 @@ class TestBasicMath:
         basic_math = BasicMath(df)
         
         with pytest.raises(ValueError, match="already exists"):
-            basic_math(y_cols=["age"], op="age + 1", replace=False)
+            basic_math(y_col="age", op="age + 1", replace=False)
 
     def test_exponentiation_operation(self):
         """Test exponentiation: gen y1 = exp(x1)"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="exp(x1)")
+        result = basic_math(y_col="y1", op="exp(x1)")
         
         expected = np.exp(df['x1'])
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -121,7 +121,7 @@ class TestBasicMath:
         """Test square root: gen y1 = sqrt(x1)"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="sqrt(x1)")
+        result = basic_math(y_col="y1", op="sqrt(x1)")
         
         expected = np.sqrt(df['x1'])
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
@@ -130,7 +130,7 @@ class TestBasicMath:
         """Test nested operations: gen y1 = (x1 + x2) * (x3 - 1)"""
         df = simu_data()
         basic_math = BasicMath(df)
-        result = basic_math(y_cols=["y1"], op="(x1 + x2) * (x3 - 1)")
+        result = basic_math(y_col="y1", op="(x1 + x2) * (x3 - 1)")
         
         expected = (df['x1'] + df['x2']) * (df['x3'] - 1)
         pd.testing.assert_series_equal(result['y1'], expected, check_names=False)
