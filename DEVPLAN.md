@@ -10,6 +10,8 @@
 | DML FrameWork           | Double Machine Learning FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
 | correlation coefficient | PearsonCorr correlation coefficient         | transforms      | v0.1.1  | - [x] |
 | StataResult             | The output result format                    | base            | v0.1.1  | - []  |
+| Other correlation       | Other correlation coefficient               | transforms.corr | v0.1.2  | - [ ] |
+| BySort()                | Support run sth with by(by_col: str) option | core.by         | v0.1.3  | - [ ] |
 
 ## v0.1.1
 - [x] Add OLS into estimators
@@ -19,9 +21,11 @@
 
 ## v0.1.2
 - [ ] Update ResultBase FrameWork
+- [ ] Add Other correlation coefficient
 
 ## v0.1.3
 - [ ] Add DML FrameWork
+- [ ] Add BySort option
 
 ## v0.1.4
 - [ ] Add weight option to OLS (Estimators.base)
