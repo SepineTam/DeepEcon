@@ -3,7 +3,9 @@
 ## Overview (The achieved item will remove after 2 version)
 | name                    | description                                  | belong          | version | state |
 |-------------------------|----------------------------------------------|-----------------|---------|-------|
-| DEconResultMthd         | DeepEcon format ResultMthd into core.results | core.results    | v0.1.2  | - []  |
+| summarize               | Summarize command                            | transforms      | v0.1.2  | - [ ] |
+| merge                   | merge two dataframe to one                   | transforms      | v0.1.4  | - [ ] |  
+| DEconResultMthd         | DeepEcon format ResultMthd into core.results | core.results    | v0.1.2  | - [ ] |
 | DiD FrameWork           | Difference-in-Difference FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
 | args: weight            | support run a regression with weight option  | estimators.base | v0.1.4  | - [ ] |
 | ResultBase              | The format of output                         | base            | v0.1.2  | - [ ] |
@@ -13,9 +15,9 @@
 | correlation coefficient | PearsonCorr correlation coefficient          | transforms      | v0.1.1  | - [x] |
 | OLS                     | Ordinary Least Squares                       | estimators      | v0.1.1  | - [x] |
 | StataResult             | The output result format                     | base            | v0.1.1  | - [x] |
-| winsor2                 | winsor function                              | transforms      | v0.1.1  | - [x] |
+| winsor2                 | winsor function                              | transforms      | v0.1.1  | - [x] | 
 
-## v0.1.1 (Achieved)
+## v0.1.1 (Achieved@2025-08-18)
 - [x] Add OLS into estimators
 - [x] Add winsor2 function to transforms
 - [x] 20250818 | Add PearsonCorr correlation coefficient into transforms
@@ -25,6 +27,7 @@
 - [ ] Update ResultBase FrameWork
 - [ ] Add Other correlation coefficient
 - [ ] Add DeepEcon format ResultMthd into core.results
+- [ ] Summarize command into transforms
 
 ## v0.1.3
 - [ ] Add DML FrameWork
@@ -33,4 +36,4 @@
 
 ## v0.1.4
 - [ ] Add weight option to OLS (Estimators.base)
-
+- [ ] Add `merge` into transforms
