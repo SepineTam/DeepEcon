@@ -106,7 +106,7 @@ class ResultBase(ABC):
 
     def __str__(self):
         mthd_class: ResultStrMthdBase = get_render(self.mthd)
-        return mthd_class.render(self, res=self)
+        return mthd_class.render(mthd_class, res=self)
 
 
 class Base(ABC):
