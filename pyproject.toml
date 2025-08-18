@@ -1,6 +1,6 @@
 [project]
 name = "deepecon"
-version = "0.1.0"
+version = "0.1.1"
 description = "A econometrics algorithms package in Python"
 readme = "README.md"
 authors = [
@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.0.2",
     "openpyxl>=3.1.5",
     "pandas>=2.2.3",
+    "scipy>=1.16.1",
 ]
 
 [tool.pytest.ini_options]

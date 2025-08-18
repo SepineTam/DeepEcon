@@ -11,6 +11,8 @@ from .base import ResultStrMthdBase
 
 
 class StataResultMthd(ResultStrMthdBase):
+    """Class for rendering results in Stata-like format."""
+    
     name = "stata"
 
     short = "-------------"
@@ -19,11 +21,23 @@ class StataResultMthd(ResultStrMthdBase):
     black3 = "   "
 
     def render(self, res: "ResultBase", *args, **kwargs) -> str:
+        """Render the result in a Stata-like format.
+        
+        Args:
+            res: The result object to render.
+            
+        Returns:
+            A string representation of the result in Stata-like format.
+        """
         anova = res.ANOVA
         meta = res.meta
         reg_data = res.data
 
-        repr_str = "      Source |       SS           df       MS   "
+        repr_str = f"Date: {meta.get('Date')} Time: {meta.get('time')}"
+        repr_str += "\n"
+        repr_str += self.short + "+" + self.longer
+        repr_str += "\n"
+        repr_str += "      Source |       SS           df       MS   "
         repr_str += self.black3
         repr_str += "Number of obs   ="
         repr_str += f"{meta.get('n'):>10}"
@@ -87,7 +101,7 @@ class StataResultMthd(ResultStrMthdBase):
         repr_str += f"{ms_total_str:>10}"
         repr_str += self.black3
         repr_str += "Root MSE        ="
-        root_mse_str = f"{meta.get('MSE'):.4f}"
+        root_mse_str = f"{meta.get('MSE'):.4f}"[0:6]
         repr_str += f"{root_mse_str:>10}"
         repr_str += "\n"
         repr_str += "\n"
@@ -97,6 +111,8 @@ class StataResultMthd(ResultStrMthdBase):
 
         y_name = self.__shorter_var_name(reg_data["y_name"])
         repr_str += f" {y_name:>11} | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]"
+        repr_str += "\n"
+        repr_str += self.short + "+" + self.longer
         repr_str += "\n"
 
         X_names = reg_data["X_names"]
@@ -112,8 +128,8 @@ class StataResultMthd(ResultStrMthdBase):
             repr_str += f" {self.__shorter_var_name(X_names[i])} |"
             repr_str += f" {self.__shorter_float(beta[i]):>9}  "
             repr_str += f" {self.__shorter_float(stderr[i]):>9}  "
-            repr_str += f" {self.process_tp_value(t_value[i])}  "
-            repr_str += f" {self.process_tp_value(p_value[i])}  "
+            repr_str += f" {self.process_t_value(t_value[i]):>6}  "
+            repr_str += f" {self.process_p_value(p_value[i]):>5}  "
             repr_str += f" {self.__shorter_float(ci_lower[i]):>9}  "
             repr_str += f" {self.__shorter_float(ci_upper[i]):>9}  "
             repr_str += "\n"
@@ -122,11 +138,40 @@ class StataResultMthd(ResultStrMthdBase):
         return repr_str
 
     @staticmethod
-    def process_tp_value(value: float) -> str:
+    def process_t_value(value: float) -> str:
+        """Format t-value to 2 decimal places.
+        
+        Args:
+            value: The t-value to format.
+            
+        Returns:
+            Formatted t-value string.
+        """
+        return f"{value:.2f}"
+
+    @staticmethod
+    def process_p_value(value: float) -> str:
+        """Format p-value to 3 decimal places.
+        
+        Args:
+            value: The p-value to format.
+            
+        Returns:
+            Formatted p-value string.
+        """
         return f"{value:.3f}"
 
     @staticmethod
     def __shorter_var_name(var_name: str, max_length: int = 11) -> str:
+        """Shorten variable name if it exceeds maximum length.
+        
+        Args:
+            var_name: The variable name to shorten.
+            max_length: Maximum length allowed.
+            
+        Returns:
+            Shortened variable name.
+        """
         if len(var_name) <= max_length:
             var_name = f"{var_name:>11}"
             return var_name
@@ -136,57 +181,71 @@ class StataResultMthd(ResultStrMthdBase):
         return f"{prefix}~{suffix}"
 
     @staticmethod
-    def __shorter_float(data: int | float, max_length: int = 8) -> str:
-        sign = "-" if data < 0 else " "
+    def __shorter_float(data: int | float, aim_length: int = 9) -> str:
+        """Format float number to fit within specified length.
+        
+        Args:
+            data: The number to format.
+            aim_length: Target string length.
+            
+        Returns:
+            Formatted number string that fits within the specified length.
+        """
+        # Handle sign
+        sign = ' ' if data >= 0 else '-'
         abs_data = abs(data)
 
+        # Special case: zero
         if abs_data == 0:
-            return " 0"
+            result = sign + '0'
+            return result.rjust(aim_length)
 
-        # 根据数值大小选择合适的格式化方式
-        if abs_data >= 1e7 or abs_data < 1e-4:
-            # 使用科学计数法
-            formatted = f"{abs_data:.2e}"
-            parts = formatted.lower().split("e")
-            mantissa = float(parts[0])
-            exponent = int(parts[1])
-            result = f"{sign}{mantissa:.2f}e{exponent:+03d}"
+        # Determine if scientific notation is needed
+        # For very large or very small numbers, use scientific notation
+        if abs_data >= 1:
+            # Large numbers: if integer part has too many digits, use scientific notation
+            integer_digits = len(str(int(abs_data)))
+            if integer_digits > aim_length - 2:  # Subtract sign and decimal point
+                # Use scientific notation
+                formatted = f"{abs_data:.2e}"
+                result = sign + formatted
+            else:
+                # Regular format, calculate available decimal places
+                available_decimals = aim_length - 1 - integer_digits - 1  # sign-integer-decimal point
+                if available_decimals > 0:
+                    result = sign + f"{abs_data:.{available_decimals}f}".rstrip('0').rstrip('.')
+                else:
+                    result = sign + str(int(abs_data))
         else:
-            # 使用普通小数格式
-            if abs_data < 1:
-                # 对于小于1的数，去掉前导0，补全小数位
-                # 计算需要的小数位数，确保总长度为max_length-1（去掉符号位）
-                decimal_places = max_length - 1  # 减去符号位
-                formatted = f"{abs_data:.{decimal_places}f}"
-                
-                # 去掉前导0，例如0.123 -> .123
-                if formatted.startswith("0."):
-                    formatted = formatted[1:]  # 去掉前导0
-                elif formatted.startswith("-0."):
-                    formatted = "-" + formatted[2:]  # 去掉负号后的前导0
-                
-                result = f"{sign}{formatted}"
-            else:
-                # 对于大于等于1的数，使用科学计数法
-                formatted = f"{abs_data:.2e}"
-                parts = formatted.lower().split("e")
-                mantissa = float(parts[0])
-                exponent = int(parts[1])
-                result = f"{sign}{mantissa:.2f}e{exponent:+03d}"
+            # Small decimals: count leading zeros
+            str_data = f"{abs_data:.10f}"  # Start with sufficient precision
+            decimal_part = str_data.split('.')[1]
 
-        # 确保总长度不超过限制，必要时截断
-        if len(result) > max_length:
-            # 对于科学计数法，尝试更紧凑的格式
-            if "e" in result:
-                formatted = f"{abs_data:.2e}"
-                parts = formatted.lower().split("e")
-                mantissa = float(parts[0])
-                exponent = int(parts[1])
-                result = f"{sign}{mantissa:.2f}e{exponent:+03d}"
-            else:
-                # 对于小数，直接截断
-                result = result[:max_length]
-                if result.endswith("."):
-                    result = result[:-1]
+            # Count leading zeros
+            leading_zeros = 0
+            for char in decimal_part:
+                if char == '0':
+                    leading_zeros += 1
+                else:
+                    break
 
-        return result
+            # If too many leading zeros (e.g., >= 4), use scientific notation
+            if leading_zeros >= 4:
+                formatted = f"{abs_data:.2e}"
+                result = sign + formatted
+            else:
+                # Regular decimal format, remove leading zeros
+                available_decimals = aim_length - 2  # sign + decimal point (removed leading zero)
+                formatted_num = f"{abs_data:.{available_decimals}f}".rstrip('0').rstrip('.')
+                # Remove "0." prefix, keep only the part after decimal point
+                if formatted_num.startswith('0.'):
+                    formatted_num = '.' + formatted_num[2:]
+                result = sign + formatted_num
+
+        # If result is too long, force scientific notation
+        if len(result) > aim_length:
+            formatted = f"{abs_data:.2e}"
+            result = sign + formatted
+
+        # Right align
+        return result.rjust(aim_length)

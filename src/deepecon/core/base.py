@@ -41,7 +41,8 @@ class ResultBase(ABC):
         if mthd in list_renderers():
             self.mthd = mthd
         else:
-            pass
+            raise ValueError(f"No renderer registered for name {mthd}. "
+                             f"Available: {list_renderers()}")
 
     def __post_init__(self):
         self._anova_init()
