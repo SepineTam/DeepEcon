@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-08-18
+
+### Added
+- **Stata-style Result Rendering** - Comprehensive Stata-style result formatting system with `StataResult` class
+- **winsor2 Transform** - Winsorization functionality for data cleaning and outlier handling
+- **Registry System** - Plugin registry for transforms and estimators with decorator support
+- **Enhanced Logging** - Improved logging capabilities with structured output
+- **Session Management** - Core session handling for state management
+
+### Changed
+- **Result Formatting** - Improved display formatting for regression results and statistical output
+- **Key Naming** - Fixed and standardized key naming conventions across all results
+- **Base Classes** - Enhanced base classes for better extensibility and type safety
+- **OLS Structure** - Refactored OLS estimator for better code organization
+
+### Fixed
+- **Error Handling** - Improved validation and error messages throughout the codebase
+- **Documentation** - Updated inline documentation and examples
+- **Type Annotations** - Added comprehensive type hints for better IDE support
+
 ## [0.1.0] - 2025-08-14
 
 ### Added
