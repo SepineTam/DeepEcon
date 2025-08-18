@@ -3,7 +3,7 @@
 ## Overview
 | name                    | description                                 | belong          | version | state |
 |-------------------------|---------------------------------------------|-----------------|---------|-------|
-| OLS                     | Ordinary Least Squares                      | estimators      | v0.1.1  | - [ ] |
+| OLS                     | Ordinary Least Squares                      | estimators      | v0.1.1  | - [x] |
 | args: weight            | support run a regression with weight option | estimators.base | v0.1.4  | - [ ] |
 | winsor2                 | winsor function                             | transforms      | v0.1.1  | - [ ] |
 | ResultBase              | The format of output                        | base            | v0.1.2  | - [ ] |
@@ -11,7 +11,7 @@
 | correlation coefficient | PearsonCorr correlation coefficient         | transforms      | v0.1.1  | - [x] |
 
 ## v0.1.1
-- [ ] Add OLS into estimators
+- [x] Add OLS into estimators
 - [ ] Add winsor2 function to transforms
 - [x] 20250818 | Add PearsonCorr correlation coefficient into transforms
 
