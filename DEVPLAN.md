@@ -9,11 +9,13 @@
 | ResultBase              | The format of output                        | base            | v0.1.2  | - [ ] |
 | DML FrameWork           | Double Machine Learning FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
 | correlation coefficient | PearsonCorr correlation coefficient         | transforms      | v0.1.1  | - [x] |
+| StataResult             | The output result format                    | base            | v0.1.1  | - []  |
 
 ## v0.1.1
 - [x] Add OLS into estimators
 - [ ] Add winsor2 function to transforms
 - [x] 20250818 | Add PearsonCorr correlation coefficient into transforms
+- [ ] Add StataResult into base
 
 ## v0.1.2
 - [ ] Update ResultBase FrameWork
