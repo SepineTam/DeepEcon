@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Literal, Optional
 
+import numpy as np
 import pandas as pd
 
 from .condition import Condition
@@ -30,6 +31,7 @@ class DataFrameBase(ABC):
 
 @dataclass
 class ResultBase(ABC):
+    ANOVA: pd.DataFrame = field(default_factory=pd.DataFrame)
     data: Dict[str, Any] = field(default_factory=dict)
     meta: Dict[str, Any] = field(default_factory=dict)
     ts: datetime = field(default_factory=datetime.now)
@@ -42,27 +44,69 @@ class ResultBase(ABC):
             pass
 
     def __post_init__(self):
+        self._anova_init()
+        self._meta_init()
+
+    def update_meta(self, key: str, value: Any) -> None:
+        self.meta[key] = value
+
+    def update_anova(self, *, key: str, index: str, value: float) -> None:
+        anova_indexs: List[str] = self.ANOVA.index
+        anova_keys: List[str] = self.ANOVA.columns
+        if index not in anova_indexs:
+            raise KeyError(f"{index} not found in ANOVA")
+        if key not in anova_keys:
+            raise KeyError(f"{key} not found in ANOVA")
+        self.ANOVA.loc[index, key] = value
+
+    def update_data(self,
+                    y_name: str,
+                    *,
+                    X_names: List[str],
+                    beta: np.ndarray,
+                    stderr: np.ndarray,
+                    t_value: np.ndarray,
+                    p_value: np.ndarray,
+                    ci_lower: np.ndarray,
+                    ci_upper: np.ndarray) -> None:
+        self.data["y_name"] = y_name
+        self.data["X_names"] = X_names
+        self.data["beta"] = beta
+        self.data["stderr"] = stderr
+        self.data["t_value"] = t_value
+        self.data["p_value"] = p_value
+        self.data["ci_lower"] = ci_lower
+        self.data["ci_upper"] = ci_upper
+
+    @staticmethod
+    def __anova_index() -> List[str]:
+        return ['Model', 'Residual', 'Total']
+
+    def _meta_init(self) -> List[str]:
         self.meta["Date"] = self.ts.date()
         self.meta["time"] = self.ts.time()
         self.meta["weekday"] = calendar.day_name[self.ts.weekday()]
+        for key in self.meta_keys():
+            if key not in self.meta:
+                self.meta[key] = None
 
-    def _update_meta(self, key: str, value: Any) -> None:
-        self.meta[key] = value
-
-    def _update_data(self, key: str, value: Any) -> None:
-        self.data[key] = value
+    def _anova_init(self) -> pd.DataFrame:
+        idx = pd.Index(self.__anova_index())
+        dtypes = {
+            'SS': 'float64',
+            'df': 'Int64',
+            'MS': 'float64'
+        }
+        self.ANOVA = pd.DataFrame({c: pd.Series(dtype=t) for c, t in dtypes.items()}, index=idx)
+        return self.ANOVA
 
     @abstractmethod
     def meta_keys(self) -> List[str]:
         ...
 
-    @abstractmethod
-    def data_keys(self) -> List[str]:
-        ...
-
     def __str__(self):
         mthd_class: ResultStrMthdBase = get_render(self.mthd)
-        return mthd_class.render(self)
+        return mthd_class.render(self, res=self)
 
 
 class Base(ABC):

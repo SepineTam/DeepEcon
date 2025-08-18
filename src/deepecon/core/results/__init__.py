@@ -1,7 +1,7 @@
 from typing import Dict, List
 
-from ._format.stata import StataResultMthd
 from .base import ResultStrMthdBase
+from .stata import StataResultMthd
 
 _RENDERERS: Dict[str, ResultStrMthdBase] = {}
 
