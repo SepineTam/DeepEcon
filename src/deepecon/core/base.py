@@ -53,10 +53,12 @@ class ResultBase(ABC):
         self.data[key] = value
 
     @abstractmethod
-    def meta_keys(self) -> List[str]: ...
+    def meta_keys(self) -> List[str]:
+        ...
 
     @abstractmethod
-    def data_keys(self) -> List[str]: ...
+    def data_keys(self) -> List[str]:
+        ...
 
     def __str__(self):
         mthd_class: ResultStrMthdBase = get_render(self.mthd)
@@ -78,15 +80,18 @@ class Base(ABC):
         self.ops = self.options()
 
     @abstractmethod
-    def __call__(self, *args, **kwargs) -> pd.DataFrame: ...
+    def __call__(self, *args, **kwargs) -> pd.DataFrame:
+        ...
 
     @abstractmethod
-    def options(self) -> Dict[str, str]: ...
+    def options(self) -> Dict[str, str]:
+        ...
+
     """The args supported for this class conducted with dict"""
 
-    def std_ops(
-        self, keys: Optional[List[str]] = None, add_ops: Optional[Dict[str, str]] = None
-    ) -> Dict[str, str]:
+    def std_ops(self,
+                keys: Optional[List[str]] = None,
+                add_ops: Optional[Dict[str, str]] = None) -> Dict[str, str]:
         """
         Get function standard operation descriptions.
 
@@ -139,33 +144,6 @@ class Base(ABC):
         """
         return [var_name in self.df.columns for var_name in var_names]
 
-
-class EstimatorBase(Base):
-    name: str = "estimator"
-
-    def __call__(self, *args, **kwargs) -> pd.DataFrame:
-        return self.estimator(*args, **kwargs)
-
-    @abstractmethod
-    def estimator(
-        self,
-        y_col: str,
-        X_cols: List[str],
-        _if_exp: Optional[Condition] = None,
-        weight: Optional[pd.Series | str] = None,
-        *args,
-        **kwargs,
-    ) -> pd.DataFrame: ...
-
-    def pre_process(
-        self, y_col: str, X_cols: List[str], _if_exp: Optional[Condition] = None
-    ) -> None:
-        target_columns: List[str] = [y_col] + X_cols
-        if not all(self.check_vars_exist(target_columns)):
-            raise VarNotFoundError(y_col, X_cols)
-        self.df = self.df.dropna(subset=target_columns)
-        self._condition_on(_if_exp)
-
     def _condition_on(self, _if_exp: Optional[Condition] = None) -> pd.DataFrame:
         """Filter the DataFrame based on a condition and modify it in-place.
 
@@ -189,6 +167,29 @@ class EstimatorBase(Base):
             self.df = self.df[mask]
         return self.df
 
+    def pre_process(self,
+                    target_columns: List[str],
+                    _if_exp: Optional[Condition] = None) -> None:
+        if not all(self.check_vars_exist(target_columns)):
+            raise VarNotFoundError(target_columns, "Not Found")
+        self.df = self.df.dropna(subset=target_columns)
+        self._condition_on(_if_exp)
+
+
+class EstimatorBase(Base):
+    name: str = "estimator"
+
+    def __call__(self, *args, **kwargs) -> pd.DataFrame:
+        return self.estimator(*args, **kwargs)
+
+    @abstractmethod
+    def estimator(self,
+                  y_col: str,
+                  X_cols: List[str],
+                  _if_exp: Optional[Condition] = None,
+                  weight: Optional[pd.Series | str] = None,
+                  *args, **kwargs) -> pd.DataFrame: ...
+
 
 class TransformBase(Base):
     name: str = "transform"  # must be unique
@@ -197,15 +198,12 @@ class TransformBase(Base):
         return self.transform(*args, **kwargs)
 
     @abstractmethod
-    def transform(
-        self,
-        y_col: Optional[str] = None,
-        X_cols: Optional[List[str]] = None,
-        _if_exp: Optional[Condition] = None,
-        replace: bool = False,
-        *args,
-        **kwargs,
-    ) -> pd.DataFrame:
+    def transform(self,
+                  y_col: Optional[str] = None,
+                  X_cols: Optional[List[str]] = None,
+                  _if_exp: Optional[Condition] = None,
+                  replace: bool = False,
+                  *args, **kwargs) -> pd.DataFrame:
         """
         Apply transformation to specified columns of the dataframe and return the transformed dataframe.
         The previous df will not be change, you must capture the return value if you want to change it.

@@ -8,12 +8,12 @@
 | winsor2                 | winsor function                             | transforms      | v0.1.1  | - [ ] |
 | ResultBase              | The format of output                        | base            | v0.1.2  | - [ ] |
 | DML FrameWork           | Double Machine Learning FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
-| correlation coefficient | Pearson correlation coefficient             | transforms      | v0.1.1  | - [ ] |
+| correlation coefficient | PearsonCorr correlation coefficient         | transforms      | v0.1.1  | - [x] |
 
 ## v0.1.1
 - [ ] Add OLS into estimators
 - [ ] Add winsor2 function to transforms
-- [ ] Add Pearson correlation coefficient into transforms
+- [x] 20250818 | Add PearsonCorr correlation coefficient into transforms
 
 ## v0.1.2
 - [ ] Update ResultBase FrameWork

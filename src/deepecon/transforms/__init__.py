@@ -8,6 +8,7 @@
 # @File   : __init__.py
 
 from .basic import BasicMath
+from .corr import PearsonCorr
 from .drop import DropCondition, DropVar, KeepCondition, KeepVar
 
 __all__ = [
@@ -18,4 +19,6 @@ __all__ = [
     "DropCondition",
     "KeepVar",
     "KeepCondition",
+    # Correlation
+    "PearsonCorr",
 ]
