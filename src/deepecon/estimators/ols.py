@@ -30,7 +30,8 @@ class OrdinaryLeastSquares(EstimatorBase):
                   is_cons: Optional[str] = None,
                   *args, **kwargs) -> pd.DataFrame:
         # make sure all the args are exist and prepare data
-        self.pre_process(y_col, X_cols, _if_exp)
+        target_columns: List[str] = [y_col] + X_cols
+        self.pre_process(target_columns, _if_exp)
         y_data = self.df[y_col].to_numpy(dtype=float)
         X_data = self.df[X_cols].to_numpy(dtype=float)
 
