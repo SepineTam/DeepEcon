@@ -8,41 +8,27 @@ DeepEcon：Your one-stop Python package for econometric algorithms
 [![Issue](https://img.shields.io/badge/Issue-report-green.svg)](https://github.com/sepinetam/deepecon/issues/new)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SepineTam/DeepEcon)
 
-## Installation
+## Quickly Start
 ### Install from Pypi
 ```bash
 pip install deepecon
 ```
 
-### Manage with uv
-```bash
-uv add deepecon
+### Run a regression
+```python
+from deepecon.estimators import OLS
+import pandas as pd
+
+df: pd.DataFrame
+y_col = 'y'
+X_cols = ['x1', 'x2', 'x3']
+
+ols = OLS(df)
+result = ols(y_col, X_cols)
 ```
 
-or
-
-```bash
-uv pip install deepecon
-```
-
-### Install from GitHub
-```bash
-pip install git+https://github.com/sepinetam/deepecon.git
-```
-
-Alternatively, you can install it from the source:
-
-```bash
-# please source your environment first
-# For macOS and Linux
-# source .venv/bin/activate
-# For Windows
-# .venv\Scripts\activate
-
-git clone https://github.com/sepinetam/deepecon.git
-cd deepecon
-pip install -e .
-```
+## Roadmap
+View the roadmap [here](DEVPLAN.md).
 
 ## License
 [MIT License](LICENSE)
