@@ -61,7 +61,7 @@ class OrdinaryLeastSquares(EstimatorBase):
         std_errors = np.sqrt(np.diag(cov_matrix))
 
         t_value = beta_hat / std_errors
-        p_values = 2 * (1 - stats.t.cdf(np.abs(t_value), df=n - k))
+        p_value = 2 * (1 - stats.t.cdf(np.abs(t_value), df=n - k))
         t_critical = stats.t.ppf(0.975, df=n - k)  # 95% CI value
         ci_lower = beta_hat - t_critical * std_errors
         ci_upper = beta_hat + t_critical * std_errors
@@ -72,7 +72,7 @@ class OrdinaryLeastSquares(EstimatorBase):
                                 beta=beta_hat,
                                 stderr=std_errors,
                                 t_value=t_value,
-                                p_value=p_values,
+                                p_value=p_value,
                                 ci_lower=ci_lower,
                                 ci_upper=ci_upper)
 

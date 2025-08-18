@@ -17,4 +17,4 @@ class EstimatorResult(ResultBase):
         return ["ModelName", "n", "F1", "F2", "F-value", "ProbF", "R2", "AdjR2", "MSE"]
 
     def data_keys(self) -> List[str]:
-        return ["y", "x", "coefficient", "stderr", "t_value", "p_value", "ci_low", "ci_high"]
+        return ["y", "x", "beta", "stderr", "t_value", "p_value", "ci_low", "ci_high"]
