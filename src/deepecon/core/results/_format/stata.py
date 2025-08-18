@@ -7,7 +7,7 @@
 # @Email  : sepinetam@gmail.com
 # @File   : stata.py
 
-from .base import ResultStrMthdBase
+from ..base import ResultStrMthdBase
 
 
 class StataResultMthd(ResultStrMthdBase):

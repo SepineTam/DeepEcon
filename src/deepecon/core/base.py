@@ -179,7 +179,7 @@ class Base(ABC):
 class EstimatorBase(Base):
     name: str = "estimator"
 
-    def __call__(self, *args, **kwargs) -> pd.DataFrame:
+    def __call__(self, *args, **kwargs) -> "EstimatorResult":
         return self.estimator(*args, **kwargs)
 
     @abstractmethod
