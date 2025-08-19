@@ -4,6 +4,7 @@ DeepEcon：Your one-stop Python package for econometric algorithms
 [![en](https://img.shields.io/badge/lang-English-red.svg)](README.md)
 [![cn](https://img.shields.io/badge/语言-中文-yellow.svg)](source/docs/README/cn/README.md)
 [![PyPI version](https://img.shields.io/pypi/v/deepecon.svg)](https://pypi.org/project/deepecon/)
+[![PyPI Downloads](https://static.pepy.tech/badge/deepecon)](https://pepy.tech/projects/deepecon)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Issue](https://img.shields.io/badge/Issue-report-green.svg)](https://github.com/sepinetam/deepecon/issues/new)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SepineTam/DeepEcon)
