@@ -7,8 +7,6 @@
 # @Email  : sepinetam@gmail.com
 # @File   : pearson.py
 
-from typing import List
-
 import numpy as np
 import pandas as pd
 
