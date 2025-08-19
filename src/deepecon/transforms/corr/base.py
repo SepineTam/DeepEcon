@@ -54,10 +54,10 @@ class CorrelationBase(TransformBase):
             for col_j in X_cols:
                 if col_i > col_j:
                     r = self._base_corr(col_i, col_j)
-                    R[col_i][col_j] = r
-                    R[col_j][col_i] = r
+                    R.loc[col_i, col_j] = r
+                    R.loc[col_j, col_i] = r
                 elif col_i == col_j:
-                    R[col_i][col_j] = float(1)
+                    R.loc[col_i, col_j] = float(1)
                 else:
                     pass
         return R

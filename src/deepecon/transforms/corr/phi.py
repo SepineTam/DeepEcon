@@ -60,8 +60,9 @@ class PhiCorr(CorrelationBase):
         try:
             chi2, _, _, _ = chi2_contingency(contingency)
             n = len(x_clean)
+            if n == 0:
+                return float("nan")
             phi = np.sqrt(chi2 / n)
             return float(phi)
         except Exception as e:
-            print(f"Error calculating Phi coefficient: {e}")
             return float("nan")
