@@ -214,10 +214,12 @@ class Base(ABC):
 
     def pre_process(self,
                     target_columns: List[str],
-                    _if_exp: Optional[Condition] = None) -> None:
+                    _if_exp: Optional[Condition] = None,
+                    is_dropna: bool = True) -> None:
         if not all(self.check_vars_exist(target_columns)):
             raise VarNotFoundError(target_columns, "Not Found")
-        self.df = self.df.dropna(subset=target_columns)
+        if is_dropna:
+            self.df = self.df.dropna(subset=target_columns)
         self._condition_on(_if_exp)
 
 
