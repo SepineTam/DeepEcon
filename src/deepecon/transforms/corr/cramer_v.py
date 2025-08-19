@@ -57,5 +57,5 @@ class CramerVCorr(CorrelationBase):
 
             v = np.sqrt(chi2 / (n * min(r-1, c-1)))
             return float(v)
-        except:
+        except Exception:
             return float("nan")

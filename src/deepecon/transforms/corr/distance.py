@@ -48,5 +48,5 @@ class DistanceCorr(CorrelationBase):
         except ImportError:
             # Fallback to NaN if dcor is not available
             return float("nan")
-        except:
+        except Exception:
             return float("nan")

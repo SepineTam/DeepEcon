@@ -226,7 +226,7 @@ class Base(ABC):
 class EstimatorBase(Base):
     name: str = "estimator"
 
-    def __call__(self, *args, **kwargs) -> "EstimatorResult":
+    def __call__(self, *args, **kwargs) -> "ResultBase":
         return self.estimator(*args, **kwargs)
 
     @abstractmethod

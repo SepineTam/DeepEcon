@@ -7,7 +7,12 @@
 # @Email  : sepinetam@gmail.com
 # @File   : stata.py
 
+from typing import TYPE_CHECKING
+
 from .base import ResultStrMthdBase
+
+if TYPE_CHECKING:
+    from ..base import ResultBase
 
 
 class StataResultMthd(ResultStrMthdBase):

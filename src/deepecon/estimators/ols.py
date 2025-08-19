@@ -10,7 +10,6 @@
 from typing import Dict, List, Optional
 
 import numpy as np
-import pandas as pd
 from scipy import stats
 
 from ..core.base import EstimatorBase

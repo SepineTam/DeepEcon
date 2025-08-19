@@ -64,5 +64,5 @@ class PhiCorr(CorrelationBase):
                 return float("nan")
             phi = np.sqrt(chi2 / n)
             return float(phi)
-        except Exception as e:
+        except Exception:
             return float("nan")
