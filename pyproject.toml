@@ -14,6 +14,7 @@ dependencies = [
     "pandas>=2.2.3",
     "scikit-learn>=1.7.1",
     "scipy>=1.16.1",
+    "dcor>=0.6",
 ]
 
 [tool.pytest.ini_options]
