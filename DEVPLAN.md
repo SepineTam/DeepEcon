@@ -3,7 +3,7 @@
 ## Overview (The achieved item will remove after 2 version)
 | name                    | description                                  | belong          | version | state |
 |-------------------------|----------------------------------------------|-----------------|---------|-------|
-| summarize               | Summarize command                            | transforms      | v0.1.2  | - [ ] |
+| summarize               | Summarize command                            | transforms      | v0.1.2  | - [x] |
 | merge                   | merge two dataframe to one                   | transforms      | v0.1.4  | - [ ] |  
 | DEconResultMthd         | DeepEcon format ResultMthd into core.results | core.results    | v0.1.2  | - [ ] |
 | DiD FrameWork           | Difference-in-Difference FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
@@ -27,7 +27,7 @@
 - [ ] Update ResultBase FrameWork
 - [ ] Add Other correlation coefficient
 - [ ] Add DeepEcon format ResultMthd into core.results
-- [ ] Summarize command into transforms
+- [x] Summarize command into transforms
 
 ## v0.1.3
 - [ ] Add DML FrameWork
