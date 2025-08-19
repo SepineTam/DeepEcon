@@ -12,7 +12,7 @@ from .base import ResultStrMthdBase
 
 class StataResultMthd(ResultStrMthdBase):
     """Class for rendering results in Stata-like format."""
-    
+
     name = "stata"
 
     short = "-------------"
@@ -22,10 +22,10 @@ class StataResultMthd(ResultStrMthdBase):
 
     def render(self, res: "ResultBase", *args, **kwargs) -> str:
         """Render the result in a Stata-like format.
-        
+
         Args:
             res: The result object to render.
-            
+
         Returns:
             A string representation of the result in Stata-like format.
         """
@@ -140,10 +140,10 @@ class StataResultMthd(ResultStrMthdBase):
     @staticmethod
     def process_t_value(value: float) -> str:
         """Format t-value to 2 decimal places.
-        
+
         Args:
             value: The t-value to format.
-            
+
         Returns:
             Formatted t-value string.
         """
@@ -152,10 +152,10 @@ class StataResultMthd(ResultStrMthdBase):
     @staticmethod
     def process_p_value(value: float) -> str:
         """Format p-value to 3 decimal places.
-        
+
         Args:
             value: The p-value to format.
-            
+
         Returns:
             Formatted p-value string.
         """
@@ -164,11 +164,11 @@ class StataResultMthd(ResultStrMthdBase):
     @staticmethod
     def __shorter_var_name(var_name: str, max_length: int = 11) -> str:
         """Shorten variable name if it exceeds maximum length.
-        
+
         Args:
             var_name: The variable name to shorten.
             max_length: Maximum length allowed.
-            
+
         Returns:
             Shortened variable name.
         """
@@ -183,11 +183,11 @@ class StataResultMthd(ResultStrMthdBase):
     @staticmethod
     def __shorter_float(data: int | float, aim_length: int = 9) -> str:
         """Format float number to fit within specified length.
-        
+
         Args:
             data: The number to format.
             aim_length: Target string length.
-            
+
         Returns:
             Formatted number string that fits within the specified length.
         """

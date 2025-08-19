@@ -7,7 +7,7 @@
 # @Email  : sepinetam@gmail.com
 # @File   : winsor2.py
 
-from typing import List, Optional, Dict, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 
