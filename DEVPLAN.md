@@ -3,15 +3,15 @@
 ## Overview (The achieved item will remove after 2 version)
 | name                    | description                                  | belong          | version | state |
 |-------------------------|----------------------------------------------|-----------------|---------|-------|
-| summarize               | Summarize command                            | transforms      | v0.1.2  | - [x] |
 | merge                   | merge two dataframe to one                   | transforms      | v0.1.4  | - [ ] |  
 | DEconResultMthd         | DeepEcon format ResultMthd into core.results | core.results    | v0.1.2  | - [ ] |
 | DiD FrameWork           | Difference-in-Difference FrameWork           | estimators.dml  | v0.1.3  | - [ ] |
-| args: weight            | support run a regression with weight option  | estimators.base | v0.1.4  | - [ ] |
 | ResultBase              | The format of output                         | base            | v0.1.2  | - [ ] |
 | DML FrameWork           | Double Machine Learning FrameWork            | estimators.dml  | v0.1.3  | - [ ] |
-| Other correlation       | Other correlation coefficient                | transforms.corr | v0.1.2  | - [ ] |
 | BySort()                | Support run sth with by(by_col: str) option  | core.by         | v0.1.3  | - [ ] |
+| args: weight            | support run a regression with weight option  | estimators.base | v0.1.4  | - [x] |
+| summarize               | Summarize command                            | transforms      | v0.1.2  | - [x] |
+| Other correlation       | Other correlation coefficient                | transforms.corr | v0.1.2  | - [x] |
 | correlation coefficient | PearsonCorr correlation coefficient          | transforms      | v0.1.1  | - [x] |
 | OLS                     | Ordinary Least Squares                       | estimators      | v0.1.1  | - [x] |
 | StataResult             | The output result format                     | base            | v0.1.1  | - [x] |
@@ -25,7 +25,7 @@
 
 ## v0.1.2
 - [ ] Update ResultBase FrameWork
-- [ ] Add Other correlation coefficient
+- [x] Add Other correlation coefficient
 - [ ] Add DeepEcon format ResultMthd into core.results
 - [x] Summarize command into transforms
 
@@ -35,5 +35,5 @@
 - [ ] Add DiD FrameWork
 
 ## v0.1.4
-- [ ] Add weight option to OLS (Estimators.base)
+- [x] Add weight option to OLS (Estimators.base)
 - [ ] Add `merge` into transforms

@@ -10,6 +10,7 @@
 from typing import Dict, List, Optional
 
 import numpy as np
+import pandas as pd
 from scipy import stats
 
 from ..core.base import EstimatorBase
@@ -24,7 +25,7 @@ class OrdinaryLeastSquares(EstimatorBase):
 
     def options(self) -> Dict[str, str]:
         return self.std_ops(
-            keys=["y_col", "X_cols"],
+            keys=["y_col", "X_cols", "weight"],
             add_ops={
                 "is_cons": "Whether to add a constant column to the design matrix",
             }
@@ -34,7 +35,7 @@ class OrdinaryLeastSquares(EstimatorBase):
                   y_col: str,
                   X_cols: List[str],
                   _if_exp: Optional[Condition] = None,
-                  weight: Optional[str] = None,
+                  weight: Optional[pd.Series | str] = None,
                   is_cons: bool = True,
                   *args, **kwargs) -> EstimatorResult:
         # make sure all the args are exist and prepare data
@@ -43,6 +44,11 @@ class OrdinaryLeastSquares(EstimatorBase):
         y_data = self.df[y_col].to_numpy(dtype=float)
         X_data = self.df[X_cols].to_numpy(dtype=float)
 
+        # Process and validate weights
+        weights = self._process_weights(weight)
+        self._validate_weights(weights)
+        W = np.diag(weights)
+
         if is_cons:
             X_data = np.hstack([X_data, np.ones((X_data.shape[0], 1))])
             X_cols.append("_cons")
@@ -50,13 +56,17 @@ class OrdinaryLeastSquares(EstimatorBase):
         n, k = X_data.shape
         self.result.update_meta("n", n)
 
-        beta_hat = np.linalg.inv(X_data.T @ X_data) @ X_data.T @ y_data
+        # Weighted least squares estimation: β = (X'WX)^(-1)X'Wy
+        XtWX = X_data.T @ W @ X_data
+        XtWy = X_data.T @ W @ y_data
+        beta_hat = np.linalg.inv(XtWX) @ XtWy
         y_hat = X_data @ beta_hat
         residuals = y_data - y_hat
 
-        ssr = np.sum(residuals ** 2)
+        # Weighted residual sum of squares
+        ssr = float(residuals.T @ W @ residuals)
         sigma_squared = ssr / (n - k)
-        cov_matrix = sigma_squared * np.linalg.inv(X_data.T @ X_data)
+        cov_matrix = sigma_squared * np.linalg.inv(XtWX)
         std_errors = np.sqrt(np.diag(cov_matrix))
 
         t_value = beta_hat / std_errors
