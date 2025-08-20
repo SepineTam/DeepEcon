@@ -1,26 +1,34 @@
-# Errors/NotFound
+# DeepEcon/errors/not_found
+
 - [English](README.md)
 - [简体中文](README.zh-CN.md)
 
-**Catalog**
-- [ConditionNotFound, 1003](#conditionnotfound)
-- [FileNotFound, 1001](#filenotfound)
-- [VarNotFound, 1002](#varnotfound)
-- [OperatorNotFound, 1004](#operatornotfound)
+Error types for when required files, variables, conditions, or operators cannot be found.
 
-## ConditionNotFound
-### Reason
-The operation or function requires a specific condition to run, but you did not provide that condition.
+## Error Types
 
-### Solution
-When invoking the function or performing the operation, make sure to supply the required condition parameter.
+- **FileNotFoundError (1001)**: File does not exist
+- **VarNotFoundError (1002)**: Variable/column not found  
+- **ConditionNotFoundError (1003)**: Missing condition expression
+- **OperatorNotFoundError (1004)**: Invalid or missing operator
 
-### Notes
-In general, this error should not occur; it is only raised for operations that explicitly require a condition to be passed.
+## Quick Reference
 
-## FileNotFound
+| Error Code | Description | Example Fix |
+|------------|-------------|-------------|
+| 1001 | Check file path exists | `os.path.exists(filepath)` |
+| 1002 | Verify column names | `list(df.columns)` |
+| 1003 | Provide condition parameter | `_if_exp=Condition(...)` |
+| 1004 | Use valid operator string | `op='x + 1'` |
 
-## OperatorNotFound
+## Usage
 
-## VarNotFound
+```python
+from deepecon.core.errors import VarNotFoundError
 
+try:
+    # Your code here
+    pass
+except VarNotFoundError as e:
+    print(f"Variable not found: {e}")
+```
