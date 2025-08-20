@@ -232,18 +232,18 @@ class EstimatorBase(Base):
     def _process_weights(self, weight: Optional[pd.Series | str] = None) -> pd.Series:
         """
         Process weight parameter and return a pandas Series of weights.
-        
+
         Args:
             weight: Weight parameter which can be a pandas Series or a column name string.
                    If string, it should be a column name in the dataframe.
                    If None, returns a Series of ones as default weights.
-        
+
         Returns:
             pd.Series: A pandas Series of weights, with ones as default if no weights provided.
         """
         if weight is None:
             return pd.Series(1.0, index=self.df.index)
-        
+
         if isinstance(weight, str):
             # If weight is a string, treat it as a column name
             if not self.check_var_exists(weight):
@@ -252,7 +252,8 @@ class EstimatorBase(Base):
         elif isinstance(weight, pd.Series):
             # If weight is already a Series, validate its length matches the dataframe
             if len(weight) != len(self.df):
-                raise ValueError(f"Weight series length ({len(weight)}) does not match DataFrame length ({len(self.df)})")
+                raise ValueError(
+                    f"Weight series length ({len(weight)}) does not match DataFrame length ({len(self.df)})")
             return weight
         else:
             raise TypeError(f"Weight parameter must be a string (column name) or pandas Series, got {type(weight)}")
@@ -260,10 +261,10 @@ class EstimatorBase(Base):
     def _validate_weights(self, weights: pd.Series) -> None:
         """
         Validate the weights to ensure they are valid for estimation.
-        
+
         Args:
             weights: A pandas Series of weights to validate.
-        
+
         Raises:
             ValueError: If weights contain non-positive values or NaN values.
         """
