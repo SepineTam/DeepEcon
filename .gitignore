@@ -182,5 +182,9 @@ cython_debug/
 # local files
 *.local.*
 
+# temporary files
+tmp/
+*.tmp.*
+
 # release
 releases/
