@@ -1,0 +1,25 @@
+name: Sync labels
+
+on:
+  push:
+    paths:
+      - '.github/labels.yml'
+    branches:
+      - main  # or master, depending on your default branch
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Sync Labels
+        uses: EndBug/label-sync@v2
+        with:
+          # configuration file path
+          config-file: .github/labels.yml
+          # GitHub token
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # delete labels not defined in configuration file
+          delete-other-labels: false
