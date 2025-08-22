@@ -9,6 +9,8 @@ DeepEcon：Your one-stop Python package for econometric algorithms
 [![Issue](https://img.shields.io/badge/Issue-report-green.svg)](https://github.com/sepinetam/deepecon/issues/new)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SepineTam/DeepEcon)
 
+> If you need support for a new econometric algorithm or have an idea for an implementation, please submit your request via [GitHub Issues](https://github.com/sepinetam/deepecon/issues/new). After evaluation, we'll add it to our [DEVPLAN](DEVPLAN.md) for future releases. 
+
 ## Quickly Start
 ### Install from Pypi
 ```bash

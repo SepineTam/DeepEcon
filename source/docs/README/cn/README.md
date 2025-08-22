@@ -9,6 +9,7 @@ DeepEcon：你的一站式计量经济算法包
 [![Issue](https://img.shields.io/badge/Issue-report-green.svg)](https://github.com/sepinetam/deepecon/issues/new)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SepineTam/DeepEcon)
 
+> 如果你需要新的计量经济学算法支持，或者有算法实现的想法，请通过 [GitHub Issues](https://github.com/sepinetam/deepecon/issues/new) 提交你的需求。我们会在评估后将其添加到 [DEVPLAN](../../../../DEVPLAN.md) 开发计划中，在后续版本中实现。
 
 ## 快速开始
 ### 从 Pypi 安装
