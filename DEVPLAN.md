@@ -20,7 +20,7 @@
 ## v0.1.1 (Achieved@2025-08-18)
 - [x] Add OLS into estimators
 - [x] Add winsor2 function to transforms
-- [x] 20250818 | Add PearsonCorr correlation coefficient into transforms
+- [x] Add PearsonCorr correlation coefficient into transforms
 - [x] Add StataResult into base
 
 ## v0.1.2
